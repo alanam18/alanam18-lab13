@@ -50,5 +50,39 @@ public class Server {
             }
             return count;
         }
+        String handshake = in.readLine();
+        if (!handshake.equals("12345")) {
+            out.println("couldn't handshake");
+            out.flush();
+            client.close();
+            connectedTimes.add(LocalDateTime.now());
+            return;
+        }
+
+        String input = in.readLine();
+        try {
+            int number = Integer.parseInt(input);
+            int count = countFactors(number);
+            out.println("The number " + number + " has " + count + " factors");
+            out.flush();
+        } catch (Exception e) {
+            out.println("There was an exception on the server");
+            out.flush();
+        }
+
+        connectedTimes.add(LocalDateTime.now());
+        client.close();
+    }
+    public ArrayList<LocalDateTime> getConnectedTimes() {
+        ArrayList<LocalDateTime> sorted = new ArrayList<>(connectedTimes);
+        Collections.sort(sorted);
+        return sorted;
+    }
+
+    public void disconnect() throws Exception {
+        serverSocket.close();
+    }
+}
+
 }
   
