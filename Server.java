@@ -13,8 +13,6 @@ public class Server {
     }
 
     public void serve(int numClients) throws Exception {
-        List<Thread> threads = new ArrayList<>();
-
         for (int i = 0; i < numClients; i++) {
             Socket client = serverSocket.accept();
             Thread t = new Thread(() -> {
@@ -24,13 +22,9 @@ public class Server {
                     e.printStackTrace();
                 }
             });
-            threads.add(t);
             t.start();
         }
 
-        for (Thread t : threads) {
-            t.join();
-        }
     }
 
     private void handleClient(Socket client) throws Exception {
