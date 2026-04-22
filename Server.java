@@ -37,19 +37,7 @@ public class Server {
         BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         PrintWriter out = new PrintWriter(client.getOutputStream());
 
-        private int countFactors(int n) {
-            int count = 0;
-            for (int i = 1; i <= Math.sqrt(n); i++) {
-                if (n % i == 0) {
-                    if (i == n / i) {
-                        count += 1;
-                    } else {
-                        count += 2;
-                    }
-                }
-            }
-            return count;
-        }
+
         String handshake = in.readLine();
         if (!handshake.equals("12345")) {
             out.println("couldn't handshake");
@@ -73,6 +61,20 @@ public class Server {
         connectedTimes.add(LocalDateTime.now());
         client.close();
     }
+
+    private int countFactors(int n) {
+            int count = 0;
+            for (int i = 1; i <= Math.sqrt(n); i++) {
+                if (n % i == 0) {
+                    if (i == n / i) {
+                        count += 1;
+                    } else {
+                        count += 2;
+                    }
+                }
+            }
+            return count;
+    }
     public ArrayList<LocalDateTime> getConnectedTimes() {
         ArrayList<LocalDateTime> sorted = new ArrayList<>(connectedTimes);
         Collections.sort(sorted);
@@ -84,5 +86,4 @@ public class Server {
     }
 }
 
-}
   
