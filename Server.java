@@ -81,8 +81,12 @@ public class Server {
         return sorted;
     }
 
-    public void disconnect() throws Exception {
+    public void disconnect() {
+        try {
         serverSocket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

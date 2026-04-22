@@ -5,7 +5,7 @@ import java.io.*;
 import java.net.*;
 import java.time.*;
 
-public class Lab13_Tester {
+public class Lab14_Tester_Jiggle {
 
   @Test
   public void test1() {
